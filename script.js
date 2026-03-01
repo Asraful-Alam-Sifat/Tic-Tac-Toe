@@ -1,7 +1,5 @@
 const boxes = document.querySelectorAll('.box');
-// console.log(box);
 const resetBtn = document.querySelector('#reset-btn');
-// console.log(resetBtn)
 
 let turnX = true;
 
@@ -22,10 +20,31 @@ boxes.forEach((box) => {
         if(turnX){
             box.innerText = "X";
             turnX = false;
+            box.disabled = true;
         }else{
             box.innerText = "O";
             turnX = true;
+            box.disabled = true;
         }
 
+        checkWin();
     })
 })
+
+function checkWin(){
+    for(let Patterns of winPatterns){
+        const pos1Val = boxes[Patterns[0]].innerText;
+        const pos2Val = boxes[Patterns[1]].innerText;
+        const pos3Val = boxes[Patterns[2]].innerText;
+         
+        if(pos1Val !== "" && pos2Val !== "" && pos3Val !== ""){
+            if(pos1Val === pos2Val && pos2Val === pos3Val){
+                setTimeout(() =>{
+                    alert(`Player ${pos1Val} is win the game. 
+                    For Play again please Reset the game
+                    `);
+                }, 100);
+            }
+        }
+    }
+}
