@@ -15,6 +15,11 @@ const winPatterns = [
     [0, 4, 8]
 ];
 
+const resetGame = ()=> {
+    turnX = true;
+    enableBoxes();
+
+}
 
 
 boxes.forEach((box) => {
@@ -34,9 +39,16 @@ boxes.forEach((box) => {
     })
 })
 
-const disableBtns = ()=>{
+const disableBoxes = ()=>{
     for(let box of boxes){
         box.disabled = true;
+    }
+}
+
+const enableBoxes = ()=>{
+    for(let box of boxes){
+        box.disabled = false;
+        box.innerText = "";
     }
 }
 
@@ -45,11 +57,11 @@ function checkWin(){
         const pos1Val = boxes[Patterns[0]].innerText;
         const pos2Val = boxes[Patterns[1]].innerText;
         const pos3Val = boxes[Patterns[2]].innerText;
-        console.log(pos1Val, pos2Val, pos3Val)
+        // console.log(pos1Val, pos2Val, pos3Val)
          
         if(pos1Val !== "" && pos2Val !== "" && pos3Val !== ""){
             if(pos1Val === pos2Val && pos2Val === pos3Val){
-                disableBtns();
+                disableBoxes();
                 popup();
             }
         }
@@ -63,3 +75,5 @@ function checkWin(){
     }
 }
 
+
+resetBtn.addEventListener("click", resetGame);
