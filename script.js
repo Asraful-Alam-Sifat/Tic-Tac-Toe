@@ -2,6 +2,7 @@ const boxes = document.querySelectorAll('.box');
 const resetBtn = document.querySelector('#reset-btn');
 
 let turnX = true;
+//  const popupMsg = alert();
 
 const winPatterns = [
     [0, 1, 2],
@@ -13,6 +14,8 @@ const winPatterns = [
     [2, 4, 6],
     [0, 4, 8]
 ];
+
+
 
 boxes.forEach((box) => {
     box.addEventListener('click', ()=> {
@@ -31,20 +34,32 @@ boxes.forEach((box) => {
     })
 })
 
+const disableBtns = ()=>{
+    for(let box of boxes){
+        box.disabled = true;
+    }
+}
+
 function checkWin(){
     for(let Patterns of winPatterns){
         const pos1Val = boxes[Patterns[0]].innerText;
         const pos2Val = boxes[Patterns[1]].innerText;
         const pos3Val = boxes[Patterns[2]].innerText;
+        console.log(pos1Val, pos2Val, pos3Val)
          
         if(pos1Val !== "" && pos2Val !== "" && pos3Val !== ""){
             if(pos1Val === pos2Val && pos2Val === pos3Val){
-                setTimeout(() =>{
-                    alert(`Player ${pos1Val} is win the game. 
-                    For Play again please Reset the game
-                    `);
-                }, 100);
+                disableBtns();
+                popup();
             }
         }
+
+        function popup (){
+        setTimeout(() =>{
+                   alert(`Congratulations. 
+                    Player ${pos1Val} Win The Game.`);
+                }, 100);
+             }
     }
 }
+
